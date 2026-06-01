@@ -6,6 +6,65 @@ Tree-sitter has no VB.NET grammar and its C# grammar lacks semantic information.
 
 ---
 
+## Using this on your own VB.NET codebase today
+
+The upstream PR ([colbymchenry/codegraph#627](https://github.com/colbymchenry/codegraph/pull/627)) is pending review. In the meantime you can run the fork directly.
+
+### 1. Get Node.js 20+
+
+Download from [nodejs.org](https://nodejs.org) if you don't have it.
+
+### 2. Clone the codegraph fork and install dependencies
+
+```bash
+git clone https://github.com/Michael2150/codegraph
+cd codegraph
+npm install
+npm run build
+```
+
+### 3. Download the Roslyn binary
+
+Go to the [v1.0.0 release](https://github.com/Michael2150/codegraph-roslyn/releases/tag/v1.0.0) and download the binary for your platform:
+
+| Platform | File to download |
+|---|---|
+| Windows | `codegraph-roslyn-win-x64.exe` |
+| macOS Intel | `codegraph-roslyn-osx-x64` |
+| macOS Apple Silicon | `codegraph-roslyn-osx-arm64` |
+| Linux | `codegraph-roslyn-linux-x64` |
+
+Place it in the `bin/` folder inside the cloned repo, keeping the exact filename.
+
+On macOS/Linux you also need to make it executable:
+
+```bash
+chmod +x bin/codegraph-roslyn-osx-arm64
+```
+
+### 4. Index your VB.NET project
+
+```bash
+# From inside the codegraph fork directory
+node dist/bin/codegraph.js init /path/to/your/vb/project
+```
+
+That's it. codegraph will index all `.vb` files using the Roslyn extractor and store the graph in `.codegraph/` inside your project.
+
+### 5. Use it with Claude Code or another MCP client
+
+```bash
+node dist/bin/codegraph.js serve --mcp --path /path/to/your/vb/project
+```
+
+Or install it into your agent by running:
+
+```bash
+node dist/bin/codegraph.js install
+```
+
+---
+
 ## Requirements
 
 - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
