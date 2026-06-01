@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+
+      - name: Build
+        run: dotnet build --configuration Release
+
+      - name: Test
+        run: |
+          $bin = "${{ github.workspace }}\src\CodeGraph.Roslyn\bin\Release\net8.0\codegraph-roslyn.exe"
+          $env:CODEGRAPH_ROSLYN_BIN = $bin
+          dotnet test --no-build --configuration Release
+        shell: pwsh
