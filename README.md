@@ -149,12 +149,12 @@ The test suite is xUnit-based. Tests require the debug binary to exist and are s
 # 1. Build the extractor first
 dotnet build
 
-# 2. Set the binary path
+# 2. Set the binary path — must be an absolute path (the test process cwd differs from the repo root)
 # macOS / Linux
-export CODEGRAPH_ROSLYN_BIN=./src/CodeGraph.Roslyn/bin/Debug/net8.0/codegraph-roslyn
+export CODEGRAPH_ROSLYN_BIN="$(pwd)/src/CodeGraph.Roslyn/bin/Debug/net8.0/codegraph-roslyn"
 
 # Windows (PowerShell)
-$env:CODEGRAPH_ROSLYN_BIN = ".\src\CodeGraph.Roslyn\bin\Debug\net8.0\codegraph-roslyn.exe"
+$env:CODEGRAPH_ROSLYN_BIN = "$PWD\src\CodeGraph.Roslyn\bin\Debug\net8.0\codegraph-roslyn.exe"
 
 # 3. Run the full suite
 dotnet test
