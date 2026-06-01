@@ -1,0 +1,11 @@
+<Solution>
+  <Project Path="src/CodeGraph.Roslyn/CodeGraph.Roslyn.csproj" />
+  <Folder Name="/fixtures/">
+    <Project Path="fixtures/VbFixture/VbFixture.vbproj" />
+    <Project Path="fixtures/CsFixture/CsFixture.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/VbFixture.Tests/VbFixture.Tests.csproj" />
+    <Project Path="tests/CsFixture.Tests/CsFixture.Tests.csproj" />
+  </Folder>
+</Solution>
