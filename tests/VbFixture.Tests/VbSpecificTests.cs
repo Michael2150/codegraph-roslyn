@@ -101,10 +101,8 @@ namespace VbFixture.Tests
         {
             Xunit.Skip.If(!Available, Skip);
             var r = FixtureRunner.RunOnFile("VbFixture/PartialClass.Part1.vb");
-            Assert.NotNull(r.ChildNode("DataProcessor", "method", "New"),
-                "Part1 must contain the constructor");
-            Assert.NotNull(r.ChildNode("DataProcessor", "property", "InputPath"),
-                "Part1 must contain InputPath property");
+            Assert.NotNull(r.ChildNode("DataProcessor", "method", "New"));
+            Assert.NotNull(r.ChildNode("DataProcessor", "property", "InputPath"));
         }
 
         [SkippableFact]
