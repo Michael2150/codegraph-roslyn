@@ -10,20 +10,28 @@ if (args.Contains("--version"))
 var fileIdx = Array.IndexOf(args, "--file");
 if (fileIdx < 0 || fileIdx + 1 >= args.Length)
 {
-    Console.Error.WriteLine("Usage: codegraph-roslyn --file <path>");
+    Console.Error.WriteLine("Usage: codegraph-roslyn --file <path> [--stdin]");
     return 1;
 }
 
 var filePath = args[fileIdx + 1];
-if (!File.Exists(filePath))
-{
-    Console.Error.WriteLine($"File not found: {filePath}");
-    return 1;
-}
+var useStdin = args.Contains("--stdin");
 
 try
 {
-    var source = await File.ReadAllTextAsync(filePath);
+    // When --stdin is passed, read source from stdin so the caller does not
+    // need the file to be accessible on disk at the binary's working directory.
+    // The file path is still used for node IDs and qualified names.
+    var source = useStdin
+        ? await Console.In.ReadToEndAsync()
+        : await File.ReadAllTextAsync(filePath);
+
+    if (!useStdin && !File.Exists(filePath))
+    {
+        Console.Error.WriteLine($"File not found: {filePath}");
+        return 1;
+    }
+
     var ext = Path.GetExtension(filePath).ToLowerInvariant();
 
     ExtractionResult result = ext switch
