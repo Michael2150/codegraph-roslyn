@@ -29,7 +29,7 @@ npm run build
 
 ### 3. Download the Roslyn binary
 
-Go to the [v1.0.0 release](https://github.com/Michael2150/codegraph-roslyn/releases/tag/v1.0.0) and download the binary for your platform:
+Go to the [v1.0.1 release](https://github.com/Michael2150/codegraph-roslyn/releases/tag/v1.0.1) and download the binary for your platform:
 
 | Platform | File to download |
 |---|---|
