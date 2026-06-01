@@ -8,6 +8,10 @@ Tree-sitter has no VB.NET grammar and its C# grammar lacks semantic information.
 
 ## Using this on your own VB.NET codebase today
 
+> **Check the PR first:** VB.NET support is tracked in [colbymchenry/codegraph#627](https://github.com/colbymchenry/codegraph/pull/627). If that PR has been merged, the functionality is available in the official `@colbymchenry/codegraph` package and you do not need to use the fork — just `npm install -g @colbymchenry/codegraph` and run `codegraph init` in your project.
+>
+> If the PR is still pending, follow the fork instructions below.
+
 The upstream PR ([colbymchenry/codegraph#627](https://github.com/colbymchenry/codegraph/pull/627)) is pending review. In the meantime you can run the fork directly.
 
 ### 1. Get Node.js 20+
